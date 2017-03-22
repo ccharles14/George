@@ -10,7 +10,7 @@
 
 void InitSPI();
 
-unsigned char SPIdata( unsigned char value );
+unsigned char SPIdata( unsigned char  );
 
 
 #endif /* GEORGE_SPI_H_ */

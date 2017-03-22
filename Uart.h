@@ -9,7 +9,7 @@
 #define GEORGE_UART_H_
 
 void InitUART();
-void TXdata( unsigned char c );
+void TXdata( unsigned char  );
 unsigned char BTdata(void);
 
 

@@ -5,10 +5,7 @@
  * @Autor: Corentin CHARLES, Cyril GUESNET, Pierre DAMERY
  */
 
-#include <msp430.h>
-#include <stdlib.h>
-#include <time.h>
-//#include "mesure.h"
+#include "Georges.h"
 
 
 
@@ -18,6 +15,37 @@ unsigned int fixaugmenter=1;
 
 void Init_move()
 {
+
+
+	//SMLK (main clock) à 1MHz
+//	BCSCTL1 = CALBC1_1MHZ;
+	//DCOCTL = CALDCO_1MHZ;
+	//Timer A1.1: Roue B (TA1CCR1) (roue gauche avec 3e roue face à soi, au plus proche de soi)
+
+	TA1CTL = ( TASSEL_2 | MC_1| ID_0);
+	// source horloge SMCLK + mode up + prediv de 1
+
+	TA1CCTL1 |= CM_1 + CCIS_0; // front montant + CCI0A
+	TA1CCTL1 |= CCIE; // autorisation interruption
+
+	TA1CCTL1 |= OUTMOD_7; //mode reset/set sur TA0.1
+
+	TA1CCTL2 |= CM_1 | CCIS_0; // front montant + CCI0A
+	TA1CCTL2 |= CCIE; // autorisation interruption
+
+	TA1CCTL2 |= OUTMOD_7; //mode reset/set sur TA0.1
+
+
+
+	//on veut 200kHz donc TACCRO=5 (5micro sec pour compter)
+	TA1CCR0=5000; //TACCRO va avec TA0CCTL0
+	//on veut un rapport cyclique élevé, par ex: pour 70%: TACCR1=3.5
+	TA1CCR1=1; //TACCR1 va avec TA0CCTL1
+
+	//Timer A1.2: Roue A (TA1CCR2)(roue droite avec 3e roue face à soi, au plus proche de soi)
+	TA1CCR2=1; //TACCR1 va avec TA0CCTL1
+	//on veut un rapport cyclique élevé, par ex: pour 70%: TACCR1=3.5
+
 	//P2.2, P2.4, P2.1, P2.5 en sortie
 	P2DIR |= BIT2 + BIT4 + BIT1 + BIT5;
 
@@ -32,35 +60,6 @@ void Init_move()
 	//on met P2.4 (=roue gauche) en fonction primaire (en Timer TA0CLK)
 	P2SEL|=BIT4; // P1SEL à 1
 	P2SEL2&=~BIT4; // P1SEL2 à 0
-
-
-	//SMLK (main clock) à 1MHz
-	BCSCTL1 = CALBC1_1MHZ;
-	DCOCTL = CALDCO_1MHZ;
-	//Timer A1.1: Roue B (TA1CCR1) (roue gauche avec 3e roue face à soi, au plus proche de soi)
-
-	//on veut 200kHz donc TACCRO=5 (5micro sec pour compter)
-	TA1CCR0=5000; //TACCRO va avec TA0CCTL0
-	//on veut un rapport cyclique élevé, par ex: pour 70%: TACCR1=3.5
-	TA1CCR1=1; //TACCR1 va avec TA0CCTL1
-
-	TA1CTL |= 0 |(TASSEL_2 | MC_1| ID_0);
-	// source horloge SMCLK + mode up + prediv de 1
-
-	TA1CCTL1 |= CM_1 + CCIS_0; // front montant + CCI0A
-	TA1CCTL1 |= CCIE; // autorisation interruption
-
-	TA1CCTL1 |= OUTMOD_7; //mode reset/set sur TA0.1
-
-
-	//Timer A1.2: Roue A (TA1CCR2)(roue droite avec 3e roue face à soi, au plus proche de soi)
-	TA1CCR2=1; //TACCR1 va avec TA0CCTL1
-	//on veut un rapport cyclique élevé, par ex: pour 70%: TACCR1=3.5
-
-	TA1CCTL2 |= CM_1 + CCIS_0; // front montant + CCI0A
-	TA1CCTL2 |= CCIE; // autorisation interruption
-
-	TA1CCTL2 |= OUTMOD_7; //mode reset/set sur TA0.1
 
 
 }

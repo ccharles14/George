@@ -6,29 +6,34 @@
  * @version: 0
  */
 
-#include <msp430g2553.h>
-#include "Uart.h"
-#include "SPI.h"
-//#include "Mouvement.h"
+
+#include "Georges.h"
 
 void main(void) {
 
 	WDTCTL = WDTPW | WDTHOLD;   // Stop WDT
-    BCSCTL1 = CALBC1_1MHZ;      // Set DCO to 1Mhz
-    DCOCTL = CALDCO_1MHZ;       // Set DCO to 1Mhz
 
-   /* P1SEL &= ~BIT0;
+	P1DIR |= BIT0;
+	P1OUT &= ~BIT0;
+	P1DIR &= ~(BIT3);
+	P1REN |= BIT3;
+	P1OUT |= BIT3;
+	P1IES |= BIT3;
+	P1IE |= (BIT3);
+	P1IFG &= ~(BIT3);
+
+    P1SEL &= ~BIT0;
     P1SEL2 &= ~BIT0;
-    P1DIR |= BIT0;*/
+    P1DIR |= BIT0;
 
 
-    InitSPI();
-    InitUART();
-
+    //InitSPI();
+    //InitUART();
+	Init_move();
 
     __bis_SR_register(GIE); // interrupts enbled
 
-    TXdata('>');
+    //TXdata('>');
     while(1);
 }
 
@@ -48,10 +53,20 @@ __interrupt void USCI0RX_ISR(void)
 
 	d = BTdata();
 
-	if (d == 'e')
+	if (d == 'z')
+		avancer();
+	else if (d == 's')
+		reculer();
+	else if (d=='d')
+		tournerDroite();
+	else if (d=='q')
+		tournerGauche();
+	else if (d=='e')
+		oui();
+	else if (d=='r')
+		non();
+	else if (d=='t')
 		P1OUT |= BIT0;
-	if (d == 'r')
+	else if (d=='g')
 		P1OUT &= ~BIT0;
-
-
 }

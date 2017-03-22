@@ -4,7 +4,7 @@
  *  Created on: 2 mars 2017
  *      Author: c.charles.14
  */
-#include <msp430g2553.h>
+#include "Georges.h"
 
 void InitSPI(void)
 {
@@ -16,6 +16,7 @@ void InitSPI(void)
     UCB0CTL0 |= UCCKPH | UCMSB | UCMST | UCSYNC; // 3-pin, 8-bit SPI master
     UCB0CTL1 |= UCSSEL_2; // SMCLK
     UCB0CTL1 &= ~UCSWRST;
+    UCB0TXBUF = 0x22;
 }
 
 unsigned char SPIdata( unsigned char value )
