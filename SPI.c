@@ -13,7 +13,7 @@ void InitSPI(void)
     P1OUT |= BIT4; // CS high
     P1SEL |= BIT7 | BIT6 | BIT5;  // Enable SIMO + MOSI + SCLK
     P1SEL2 |= BIT7 | BIT6 | BIT5; // Enable SIMO + MOSI + SCLK
-    UCB0CTL0 |= UCCKPH | UCMSB | UCMST | UCSYNC; // 3-pin, 8-bit SPI master
+    UCB0CTL0 |= UCMSB | UCMST | UCSYNC; // 3-pin, 8-bit SPI master
     UCB0CTL1 |= UCSSEL_2; // SMCLK
     UCB0CTL1 &= ~UCSWRST;
     UCB0TXBUF = 0x22;

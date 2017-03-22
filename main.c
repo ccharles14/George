@@ -13,15 +13,6 @@ void main(void) {
 
 	WDTCTL = WDTPW | WDTHOLD;   // Stop WDT
 
-	P1DIR |= BIT0;
-	P1OUT &= ~BIT0;
-	P1DIR &= ~(BIT3);
-	P1REN |= BIT3;
-	P1OUT |= BIT3;
-	P1IES |= BIT3;
-	P1IE |= (BIT3);
-	P1IFG &= ~(BIT3);
-
     P1SEL &= ~BIT0;
     P1SEL2 &= ~BIT0;
     P1DIR |= BIT0;
