@@ -1,5 +1,5 @@
 /*
- * Uart.c
+ * Uart.c Georges
  *
  *  Created on: 2 mars 2017
  *      Author: c.charles.14
@@ -23,6 +23,12 @@ void InitUART(void)
 
 void TXdata( unsigned char c )
 {
-    while (!(IFG2&UCA0TXIFG));  // USCI_A0 TX buffer ready?
+	while (!(IFG2&UCA0TXIFG));  // USCI_A0 TX buffer ready?
     UCA0TXBUF = c;              // TX -> RXed character
+}
+
+unsigned char BTdata(void){
+	unsigned char a;
+	a = UCA0RXBUF;
+	return a;
 }

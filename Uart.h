@@ -10,6 +10,7 @@
 
 void InitUART();
 void TXdata( unsigned char c );
+unsigned char BTdata(void);
 
 
 #endif /* GEORGE_UART_H_ */

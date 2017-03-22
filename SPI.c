@@ -23,8 +23,8 @@ unsigned char SPIdata( unsigned char value )
 	unsigned char reception;
 
 	P1OUT &= ~BIT4; //CS select
-	while(!(IFG2 & UCB0TXIFG)); //attente buffer
 	UCB0TXBUF = value; // envoi de value
+	while(!(IFG2 & UCB0TXIFG)); //attente buffer
 	while(!(IFG2 & UCB0RXIFG)); //receptionUSCI_A0 ?
 	reception = UCB0RXBUF;
 	P1OUT |= BIT4; //CS unselect
