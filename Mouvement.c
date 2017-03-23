@@ -18,20 +18,20 @@ void Init_move()
 
 
 	//SMLK (main clock) à 1MHz
-//	BCSCTL1 = CALBC1_1MHZ;
-	//DCOCTL = CALDCO_1MHZ;
+	BCSCTL1 = CALBC1_1MHZ;
+	DCOCTL = CALDCO_1MHZ;
 	//Timer A1.1: Roue B (TA1CCR1) (roue gauche avec 3e roue face à soi, au plus proche de soi)
 
 	TA1CTL = ( TASSEL_2 | MC_1| ID_0);
 	// source horloge SMCLK + mode up + prediv de 1
 
 	TA1CCTL1 |= CM_1 + CCIS_0; // front montant + CCI0A
-	TA1CCTL1 |= CCIE; // autorisation interruption
+	//TA1CCTL1 |= CCIE; // autorisation interruption
 
 	TA1CCTL1 |= OUTMOD_7; //mode reset/set sur TA0.1
 
 	TA1CCTL2 |= CM_1 | CCIS_0; // front montant + CCI0A
-	TA1CCTL2 |= CCIE; // autorisation interruption
+	//TA1CCTL2 |= CCIE; // autorisation interruption
 
 	TA1CCTL2 |= OUTMOD_7; //mode reset/set sur TA0.1
 
@@ -65,26 +65,6 @@ void Init_move()
 }
 
 
-
-void tournerGauche(){
-	if (TA1CCR1==1){
-		TA1CCR1=1170;
-		TA1CCR2=1100;
-	}
-	P2OUT |= BIT1; //P2.1 à 1 (=sens du moteur A)
-	P2OUT |= BIT5; //P2.5 à 1 (=sens du moteur B)
-
-}
-
-void tournerDroite(){
-	if (TA1CCR1==1){
-		TA1CCR1=1170;
-		TA1CCR2=1100;
-	}
-	P2OUT &= ~ BIT1; //P2.1 à 0
-	P2OUT &= ~ BIT5; //P2.5 à 0
-}
-
 void avancer(){
 	if (TA1CCR1==1){
 		TA1CCR1=1370;
@@ -106,6 +86,25 @@ void reculer(){
 	//TA1CCR2=4900;
 	P2OUT |= BIT1;
 	P2OUT &= ~ BIT5;
+}
+
+void tournerGauche(){
+	if (TA1CCR1==1){
+		TA1CCR1=1170;
+		TA1CCR2=1100;
+	}
+	P2OUT |= BIT1; //P2.1 à 1 (=sens du moteur A)
+	P2OUT |= BIT5; //P2.5 à 1 (=sens du moteur B)
+
+}
+
+void tournerDroite(){
+	if (TA1CCR1==1){
+		TA1CCR1=1170;
+		TA1CCR2=1100;
+	}
+	P2OUT &= ~ BIT1; //P2.1 à 0
+	P2OUT &= ~ BIT5; //P2.5 à 0
 }
 
 void stop()

@@ -18,8 +18,8 @@ void main(void) {
     P1DIR |= BIT0;
 
 
-    //InitSPI();
-    //InitUART();
+    InitSPI();
+    InitUART();
 	Init_move();
 
     __bis_SR_register(GIE); // interrupts enbled
