@@ -5,15 +5,9 @@
  * @Autor: Corentin CHARLES, Cyril GUESNET, Pierre DAMERY
  */
 
-/* El Communication
- *
- * @version: 0.1
- *
- * @Autor: Corentin CHARLES, Cyril GUESNET, Pierre DAMERY
- */
 
 
-void Init_move();
+void InitMouve();
 
 
 

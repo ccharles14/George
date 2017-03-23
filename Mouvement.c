@@ -13,9 +13,8 @@
 unsigned int fixaugmenter=1;
  **/
 
-void Init_move()
+void InitMouve()
 {
-
 
 	//SMLK (main clock) à 1MHz
 	BCSCTL1 = CALBC1_1MHZ;
@@ -130,22 +129,31 @@ void STOP()
  */
 void accelerer()
 {
-	if(TA1CCR1!=4970)
+	if(TA1CCR1<=4570)
 	{
 		TA1CCR1=TA1CCR1+400;
 		TA1CCR2=TA1CCR2+400;
-		__delay_cycles(100000);
+	}
+	else	//Si on est déjà rapide, on monte a la vitesse max et on allume la LED pour indiquer à l'utilisateur qu'on est au max.
+	{
+		TA1CCR1=4970;
+		TA1CCR2=4900;
+		AllumerLED();
 	}
 
 }
 
 void frein()
 {
-	if(TA1CCR1!=1370)
+	if(TA1CCR1>=450)
 	{
 		TA1CCR1=TA1CCR1-400;
 		TA1CCR2=TA1CCR2-400;
-		__delay_cycles(100000);
+	}
+	else	//Si la vitesse est déjà très basse on s'arrete.
+	{
+		TA1CCR1=1;
+		TA1CCR2=1;
 	}
 
 
