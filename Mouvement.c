@@ -1,8 +1,8 @@
-/* El Communication
+/* Georges
  *
- * @version: 0.1
+ * @version: 1.2
  *
- * @Autor: Corentin CHARLES, Cyril GUESNET, Pierre DAMERY
+ * @Autor: Corentin CHARLES, Renji ZHANG
  */
 
 #include "Georges.h"
