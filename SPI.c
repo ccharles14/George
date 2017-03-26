@@ -1,8 +1,11 @@
 /*
- * SPI.c Master
+ * 	SPI.c
+ * 	SPI configuré en mode Master
  *
- *  Created on: 2 mars 2017
- *      Author: c.charles.14
+ *	Author: Corentin CHARLES
+ *
+ *	Version 1.0
+ *
  */
 #include "Georges.h"
 

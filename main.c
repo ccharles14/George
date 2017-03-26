@@ -1,11 +1,13 @@
 /*
- * File: Georges
+ *	File: Georges
  *
- * Description: Partie MPS 2553 du robot
+ *	Description: Partie MPS 2553 du robot
  *
- * @version: 0
+ *	Author: Corentin CHARLES et Renjie ZHANG
+ *
+ *	Version 1.0
+ *
  */
-
 
 
 #include "Georges.h"
@@ -72,6 +74,9 @@ void main(void) {
     		else if (donnee == 'm'){
     			EteindreLED();
     		}
+    		else if (donnee == 'h'){
+    			help();
+    		}
 
     		check = 0;
     	}
@@ -79,9 +84,9 @@ void main(void) {
 }
 
 
-#pragma vector=USCIAB0RX_VECTOR			//interuption en cas de réception de donnée.
+#pragma vector=USCIAB0RX_VECTOR			//interuption en cas de réception de donnée via l'Uart
 __interrupt void USCI0RX_ISR(void)
 {
-	donnee = BTdata();	//Enregistrement de la donnée.
+	donnee = RXdata();	//Enregistrement de la donnée.
 	check = 1;			//Indication qu'une donnée est arrivée.
 }

@@ -1,8 +1,10 @@
 /*
- * LED.c
+ * 	LED.c
  *
- *  Created on: 23 mars 2017
- *      Author: Corentin
+ *	Author: Corentin CHARLES
+ *
+ *	Version 1.0
+ *
  */
 #include "Georges.h"
 

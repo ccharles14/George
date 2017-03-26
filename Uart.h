@@ -1,8 +1,10 @@
 /*
- * UART.h
+ * 	Uart.h
  *
- *  Created on: 2 mars 2017
- *      Author: c.charles.14
+ *	Author: Corentin CHARLES
+ *
+ *	Version 1.0
+ *
  */
 
 #ifndef GEORGE_UART_H_
@@ -10,7 +12,8 @@
 
 void InitUART();
 void TXdata( unsigned char  );
-unsigned char BTdata(void);
+unsigned char RXdata(void);
+void help(void);
 
 
 #endif /* GEORGE_UART_H_ */

@@ -1,8 +1,10 @@
-/* Georges
+/*
+ * 	Mouvement.c
  *
- * @version: 1.2
+ *	Author: Corentin CHARLES
  *
- * @Autor: Corentin CHARLES, Renji ZHANG
+ *	Version 1.0
+ *
  */
 
 #include "Georges.h"
@@ -25,12 +27,12 @@ void InitMouve()
 	// source horloge SMCLK + mode up + prediv de 1
 
 	TA1CCTL1 |= CM_1 + CCIS_0; // front montant + CCI0A
-	//TA1CCTL1 |= CCIE; // autorisation interruption
+	//TA1CCTL1 |= CCIE; // autorisation interruption			Supprimé car fonctionne sans et perturbe le programme principal.
 
 	TA1CCTL1 |= OUTMOD_7; //mode reset/set sur TA0.1
 
 	TA1CCTL2 |= CM_1 | CCIS_0; // front montant + CCI0A
-	//TA1CCTL2 |= CCIE; // autorisation interruption
+	//TA1CCTL2 |= CCIE; // autorisation interruption			Supprimé car fonctionne sans et perturbe le programme principal.
 
 	TA1CCTL2 |= OUTMOD_7; //mode reset/set sur TA0.1
 
@@ -162,7 +164,7 @@ void frein()
 
 
 /*
- * Fonction ne servant pas trop au mouvement
+ * Fonction ne servant pas trop au mouvement mais plus à la communication.
  */
 void oui()
 {
@@ -180,19 +182,7 @@ void oui()
 	TA1CCR2=1;
 }
 
-//fonction pour le non
-void tournerDroiteT(){
-	TA1CCR1=1000;
-	TA1CCR2=1000;
-	P2OUT &= ~ BIT1; //P2.1 à 0
-	P2OUT &= ~ BIT5; //P2.5 à 0
-}
-void tournerGaucheT(){
-	TA1CCR1=1000;
-	TA1CCR2=1000;
-	P2OUT |= BIT1; //P2.1 à 1 (=sens du moteur A)
-	P2OUT |= BIT5; //P2.5 à 1 (=sens du moteur B)
-}
+
 
 void non()
 {
@@ -212,5 +202,21 @@ void non()
 }
 
 
+//fonction pour le non
+/*
+ * Les tourner gauche et droite classique pouvant être trop rapide en fonction de la vitesse à laquelle on se trouve au moment de l'execution, deux fonctions spécial pour le "non" sont créés.
+ */
 
+void tournerDroiteT(){
+	TA1CCR1=1000;
+	TA1CCR2=1000;
+	P2OUT &= ~ BIT1; //P2.1 à 0
+	P2OUT &= ~ BIT5; //P2.5 à 0
+}
+void tournerGaucheT(){
+	TA1CCR1=1000;
+	TA1CCR2=1000;
+	P2OUT |= BIT1; //P2.1 à 1 (=sens du moteur A)
+	P2OUT |= BIT5; //P2.5 à 1 (=sens du moteur B)
+}
 

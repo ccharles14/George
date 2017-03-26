@@ -1,8 +1,10 @@
-/* El Communication
+/*
+ * 	Georges.h
  *
- * @version: 0.1
+ *	Author: Corentin CHARLES
  *
- * @Autor: Corentin CHARLES, Cyril GUESNET, Pierre DAMERY
+ *	Version 1.0
+ *
  */
 
 

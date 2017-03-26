@@ -1,8 +1,10 @@
 /*
- * Uart.c Georges
+ * 	Uart.c
  *
- *  Created on: 2 mars 2017
- *      Author: c.charles.14
+ *	Author: Corentin CHARLES
+ *
+ *	Version 1.0
+ *
  */
 #include "Georges.h"
 
@@ -26,9 +28,22 @@ void TXdata( unsigned char c )
     UCA0TXBUF = c;              // TX -> RXed character
 }
 
-unsigned char BTdata(void){
+unsigned char RXdata(void){
 	unsigned char a;
 	while (!(IFG2&UCA0RXIFG));
 	a = UCA0RXBUF;
 	return a;
+}
+
+void help(void){
+	unsigned char h[89]={'C','o','m','m','a','n','d',' ','s','i','m','p','l','e',':','\n','\r', 	//Commande simple:
+						'a','v','a','n','c','e','r',':',' ','z','\n','\r', 							//avancer: z
+						'r','e','c','u','l','e','r',':',' ','s','\n','\r', 							//reculer: s
+						'd','r','o','i','t','e',':',' ','d','\n','\r', 								//droite: d
+						'g','a','u','c','h','e',':',' ','q','\n','\r', 								//gauche: q
+						'a','c','c','e','l','e','r','e','r',':',' ','e','\n','\r',					//accelerer: e
+						'f','r','e','i','n','e','r',':',' ','a','\n','\r',}; 						//freiner: a
+	int i;
+	for(i=0;i<=88;i++)
+		TXdata(h[i]);
 }

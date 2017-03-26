@@ -1,8 +1,10 @@
 /*
- * SPI.h
+ * 	SPI.h
  *
- *  Created on: 2 mars 2017
- *      Author: c.charles.14
+ *	Author: Corentin CHARLES
+ *
+ *	Version 1.0
+ *
  */
 
 #ifndef GEORGE_SPI_H_
